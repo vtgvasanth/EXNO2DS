@@ -23,87 +23,156 @@ STEP 7: Use cross tabulation method to quantitatively analyze the relationship b
 STEP 8: Use heatmap method of representation to show relationships between two variables, one plotted on each axis.
 
 ## CODING AND OUTPUT
+
 ```
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-df=pd.read_csv("/content/titanic_dataset.csv")
-df
+dt=pd.read_csv("/content/titanic_dataset.csv")
+dt
 ```
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/04879ce0-bd42-4f96-8239-5da905099df5)
-```
-df.head()
-```
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/62b8f167-67f8-4731-b30d-dd576849be1b)
-```
-df.tail()
-```
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/56b53cf0-93d0-461e-bbc0-586c6b352005)
-```
-df.nunique()
-```
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/afe03dd9-9514-4643-9404-981a9527dbb9)
-```
-df["Survived"].value_counts()
-```
+![i1](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/5ded3eed-9580-4d52-b4d4-46bd0800e0fb)
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/6fc646ff-722f-4df6-a7a6-3bfa2008e8f5)
+
+
 ```
-per=(df["Survived"].value_counts()/df.shape[0]*100).round(2)
+dt.info()
+```
+![i2](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/93d39005-1723-4dd1-bd9e-d982593fa289)
+
+
+
+```
+dt.shape
+```
+![i3](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/9203b783-f251-4e12-96c7-55b9baea2bae)
+
+
+
+```
+dt.set_index("PassengerId",inplace=True)
+dt.describe()
+```
+![i4](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/0e27de34-9652-477f-828d-e81cc82092c1)
+
+
+
+```
+dt.nunique()
+```
+![i5](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/b6e4e3ae-ca9a-4d0d-a8d2-961b55fee46d)
+
+
+
+```
+dt["Survived"].value_counts()
+```
+![i6](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/0b3d5011-c153-4fab-b113-ef314ba17b49)
+
+
+
+```
+per=(dt["Survived"].value_counts()/dt.shape[0]*100).round(2)
 per
 ```
+![i7](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/9ce96e1c-e629-4f4d-9ae6-8f95d4ef275f)
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/dd14fb07-841d-441e-bb7e-3610c0870ddc)
-```
-sns.countplot(data=df,x="Survived")
-```
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/44e75547-aa89-4779-a3aa-d8222541e404)
-```
-df.Pclass.unique()
-```
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/9057a7f1-9322-475d-af37-f51f38f69e28)
 ```
-df.rename(columns={'Sex':'Gender'},inplace=True)
-df
+sns.countplot(data=dt,x="Survived")
 ```
+![i8](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/5b0a579e-e801-4513-b7f9-2d0be7c09b53)
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/7eb551a5-aab4-4796-b3b3-9c62cbc96b24)
-```
-sns.catplot(x="Gender",col="Survived",kind="count",data=df,height=5,aspect=.7)
-```
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/071a1059-1093-4929-ae81-791bba335649)
-```
-sns.catplot(x='Survived',hue="Gender",data=df,kind="count")
-```
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/077b83b0-c3b9-4b8f-8502-cf8fd4874f19)
 ```
-df.boxplot(column="Age",by="Survived")
+dt
 ```
+![i9](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/367bf50a-a8e8-41a4-bea9-c76c0545f677)
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/a9340db5-8d7e-41a8-a8e1-e9ea3cba7916)
-```
-sns.scatterplot(x=df["Age"],y=df["Fare"])
-```
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/b13f5ac4-7c97-4b29-a1e0-2a2c6031171c)
-```
-fig, ax1=plt.subplots(figsize=(8,5))
-pt=sns.boxplot(ax=ax1,x='Pclass',y='Age',hue='Gender',data=df)
-```
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/8c54ffbc-a7bf-4a41-bc43-be85380571a7)
+
 ```
-corr=df.corr()
+dt.Pclass.unique()
+```
+![i10](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/c6fd8302-cbf6-4298-97a5-5495e64c796f)
+
+
+
+```
+dt.rename(columns={'Sex':'Gender'},inplace=True)
+dt
+```
+![i11](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/d6b25f8b-6cf2-4fed-aa40-deba76670100)
+
+
+
+```
+sns.catplot(x="Gender",col="Survived",kind="count",data=dt,height=5,aspect=.7)
+```
+![i12](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/33fb73dc-9f31-4a04-a0e6-f2be064333e1)
+
+
+
+```
+sns.catplot(x='Survived',hue="Gender",data=dt,kind='count')
+```
+![i13](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/97c65d98-3d5b-4c8f-b15b-133eaa44ff36)
+
+
+
+```
+dt.boxplot(column="Age",by="Survived")
+```
+![i14](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/dfc871b2-3bb4-48fa-9c54-1bce095aaefa)
+
+
+
+```
+sns.scatterplot(x=dt["Age"],y=dt["Fare"])
+```
+![i15](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/cb75f5dc-d861-4f46-bf25-0968beebcec3)
+
+
+
+```
+sns.jointplot(x="Age",y="Fare",data=dt)
+```
+![i16](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/fd3e5f25-ef67-4b94-b5d0-d70aa96c6899)
+
+
+
+```
+fig,ax1=plt.subplots(figsize=(8,5))
+sns.boxplot(ax=ax1,x="Pclass",y="Age",hue="Gender",data=dt)
+```
+![i17](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/d6682085-efab-4ffd-90e1-671d50df4117)
+
+
+
+```
+sns.catplot(data=dt,col="Survived",x="Gender",hue="Pclass",kind="count")
+```
+![i18](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/84bb21a0-ff01-46fb-8b07-dd7c6177db8e)
+
+
+
+```
+corr=dt.corr()
 sns.heatmap(corr,annot=True)
 ```
+![i19](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/609e683c-fa96-4522-93fd-4aefede06e48)
 
-![image](https://github.com/Lokhnath10/EXNO2DS/assets/138969918/50572a7d-a49b-4e01-ae93-4925dcc0c627)
 
 
-# RESULT 
-The EDA Analysis using python is executed successfully.
+```
+sns.pairplot(dt)
+```
+![i20](https://github.com/silambarasan2004/EXNO2DS/assets/119559917/1ac874ab-6bd4-4a5f-bebe-a5f403832beb)
+
+
+# RESULT
+       Thus, the Exploratory Data Analysis on the given data set was performed successfully.
